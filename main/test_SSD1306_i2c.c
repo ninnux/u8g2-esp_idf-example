@@ -11,10 +11,14 @@
 #include "u8g2_esp32_hal.h"
 
 // SDA - GPIO21
-#define PIN_SDA 21
+//#define PIN_SDA 21
+#define PIN_SDA 4 
 
 // SCL - GPIO22
-#define PIN_SCL 22
+//#define PIN_SCL 22
+#define PIN_SCL 15
+
+#define PIN_RESET 16
 
 static const char *TAG = "ssd1306";
 
@@ -22,6 +26,7 @@ void task_test_SSD1306i2c(void *ignore) {
 	u8g2_esp32_hal_t u8g2_esp32_hal = U8G2_ESP32_HAL_DEFAULT;
 	u8g2_esp32_hal.sda   = PIN_SDA;
 	u8g2_esp32_hal.scl  = PIN_SCL;
+	u8g2_esp32_hal.reset  = PIN_RESET;
 	u8g2_esp32_hal_init(u8g2_esp32_hal);
 
 
@@ -42,13 +47,13 @@ void task_test_SSD1306i2c(void *ignore) {
 	ESP_LOGI(TAG, "u8g2_ClearBuffer");
 	u8g2_ClearBuffer(&u8g2);
 	ESP_LOGI(TAG, "u8g2_DrawBox");
-	u8g2_DrawBox(&u8g2, 0, 26, 80,6);
+	u8g2_DrawBox(&u8g2, 0, 26, 50,6);
 	u8g2_DrawFrame(&u8g2, 0,26,100,6);
 
 	ESP_LOGI(TAG, "u8g2_SetFont");
     u8g2_SetFont(&u8g2, u8g2_font_ncenB14_tr);
 	ESP_LOGI(TAG, "u8g2_DrawStr");
-    u8g2_DrawStr(&u8g2, 2,17,"Hi nkolban!");
+    u8g2_DrawStr(&u8g2, 2,17,"Hi pruppe'!");
 	ESP_LOGI(TAG, "u8g2_SendBuffer");
 	u8g2_SendBuffer(&u8g2);
 

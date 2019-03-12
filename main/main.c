@@ -1,6 +1,6 @@
 
 #include "freertos/FreeRTOS.h"
- #include <driver/spi_master.h>
+#include <driver/spi_master.h>
 #include <esp_log.h>
 #include <stdio.h>
 #include <string.h>
@@ -15,13 +15,14 @@
 #include "sdkconfig.h"
 #include "u8g2_esp32_hal.h"
 
-void task_test_SSD1306(void *ignore);
 
-#define PIN_CLK   14  // CLK   - GPIO14
-#define PIN_MOSI  13  // MOSI  - GPIO 13
-#define PIN_RESET 26  // RESET - GPIO 26
-#define PIN_DC    27  // DC    - GPIO 27
-#define PIN_CS    15  // CS    - GPIO 15
+void task_test_SSD1306i2c(void *ignore);
+
+//#define PIN_CLK   14  // CLK   - GPIO14
+//#define PIN_MOSI  13  // MOSI  - GPIO 13
+//#define PIN_RESET 26  // RESET - GPIO 26
+//#define PIN_DC    27  // DC    - GPIO 27
+//#define PIN_CS    15  // CS    - GPIO 15
 
 
 esp_err_t event_handler(void *ctx, system_event_t *event)
@@ -34,7 +35,7 @@ esp_err_t event_handler(void *ctx, system_event_t *event)
 void app_main(void)
 {
 xTaskCreate(
-    task_test_SSD1306,  /* Function that implements the task. */
+    task_test_SSD1306i2c,  /* Function that implements the task. */
     "test",             /* Text name for the task. */
     3000,               /* Stack size in words, not bytes. */
     NULL,               /* Parameter passed into the task. */
